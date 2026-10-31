@@ -1,0 +1,10 @@
+<?php
+declare(strict_types=1);
+require_once dirname(__DIR__) . '/app/bootstrap.php';
+nw_page('Settings', 'settings', static function (): void {
+    ?>
+    <div class="page-heading"><div><span class="eyebrow">YOUR PREFERENCES</span><h1>Settings<span class="heading-period">.</span></h1><p>Control this browser's display preferences.</p></div></div>
+    <section class="settings-grid"><article class="panel settings-card"><div class="settings-icon">◉</div><div><span class="eyebrow">DISPLAY</span><h2>Portfolio display</h2><p>These preferences stay in your browser and are not linked to an account.</p></div><label class="settings-field">Preferred network<select id="preferred-network"><option value="">Choose when viewing</option><?php try { foreach (nw_networks() as $network): ?><option value="<?= (int) $network['chain_id'] ?>"><?= nw_h($network['name']) ?></option><?php endforeach; } catch (PDOException $e) { ?><option value="">Database setup required</option><?php } ?></select></label><label class="settings-toggle"><span><strong>Remember public address on this device</strong><small>Stored in this browser only. Never uploaded or synced.</small></span><input type="checkbox" id="remember-address"><i></i></label><button class="button button-primary" id="save-settings" type="button">Save preferences <span>→</span></button><span class="setting-feedback" id="settings-feedback" aria-live="polite"></span></article>
+    <article class="panel settings-card safety-card"><div class="settings-icon safety-icon">⬡</div><div><span class="eyebrow">SECURITY & PRIVACY</span><h2>Your control comes first</h2><p>NOVAWALLET is strictly read-only. There is no sign-in, wallet connection, custody, transfer, swap, approval, or signing feature.</p></div><div class="safety-list"><span>✓ No seed phrase or private key</span><span>✓ No wallet password or PIN</span><span>✓ Public RPC requests only</span><span>✓ QR generated locally in address viewer</span></div><div class="notice notice-info">Never share a recovery phrase, private key, wallet password, or UPI PIN with any service.</div></article></section>
+    <?php
+});

@@ -1,0 +1,5 @@
+/app/config.local.php
+/storage/*
+!/storage/.htaccess
+!/storage/.gitkeep
+.env
